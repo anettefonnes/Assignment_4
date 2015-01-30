@@ -3,34 +3,36 @@ using System;
 namespace SpaceSim{
 	
 	public struct Point{ 
-		int x = 0;
-		int y = 0;
+		public int x;
+		public int y;
 	}
 	
 		
 	public class SpaceObject{
 		
 		//Protected Variables
-		protected String name;
+		protected string name;
 		protected double radius_orbital;
 		protected double period_orbital;
 		protected double radius_object;
 		protected double period_rotational;
 		protected string color;
 
-		protected void setOrbitalRadius(double = 10);
-		protected void setOrbitalPeriod(double = 10);
-		protected void setRotationalPeriod(double = 10);
-		protected void setObjectRadius(double = 10);
-		protected void setName(string = "Unknown");		
+		protected void setOrbitalRadius(double _orbRad = 10) { radius_orbital = _orbRad;}
+		protected void setOrbitalPeriod(double _orbPer = 10) { period_orbital = _orbPer; }
+		protected void setRotationalPeriod(double _rotPer = 10){ period_rotational = _rotPer; }
+		protected void setObjectRadius(double _objRad = 10){ radius_object = _objRad; }
+		protected void setName(string _name = "Unknown"){ name = _name; }
+		protected void setColor(string _color = "Blue") { color = _color; }	
 		
 		
 		//Public Variables
-		public double getOrbitalRadius();
-		public double getOrbitalPeriod();
-		public double getRotationalPeriod();
-		public double getObjectRadius();
-		public string getName();
+		public double getOrbitalRadius(){ return radius_orbital; }
+		public double getOrbitalPeriod(){ return period_orbital; }
+		public double getRotationalPeriod(){ return period_rotational; }
+		public double getObjectRadius(){ return radius_object; }
+		public string getName(){ return name;}
+		public string getColor(){ return color;}
 	
 
 		//Constructors
@@ -44,10 +46,10 @@ namespace SpaceSim{
 			Console.WriteLine(name);
 		}
 	
-		/* This method calculates the Space Objects  position */
+		/* This method calculates the Space Objects  position 
 		public virtual Point findPosition(int time = 0);{
 			(getOrbitalRadius() * 2 * Math.PI)*getOrbitalPeriod 
-		}
+		}*/
 		
 	}
 
