@@ -1,0 +1,9 @@
+#Folders
+gen/
+bin/
+
+#Library
+*.dll
+
+#Executables
+*.exe
