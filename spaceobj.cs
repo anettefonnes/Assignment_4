@@ -11,12 +11,13 @@ namespace SpaceSim{
 	public class SpaceObject{
 		
 		//Protected Variables
+		protected SpaceObject orbitElem;
 		protected string name;
+		protected string color;
 		protected double radius_orbital;
 		protected double period_orbital;
 		protected double radius_object;
 		protected double period_rotational;
-		protected string color;
 
 		protected void setOrbitalRadius(double _orbRad = 10) { radius_orbital = _orbRad;}
 		protected void setOrbitalPeriod(double _orbPer = 10) { period_orbital = _orbPer; }
@@ -36,20 +37,39 @@ namespace SpaceSim{
 	
 
 		//Constructors
-		public SpaceObject(String _name){
-			name = _name;
+		public SpaceObject(String _name = "Unknown Object"){
+			setName(_name);
 		}
-		
+		public SpaceObject(String _name = "Unknown Object"){
+			setName(_name);
+		}
 		//Public Methods
 		/*This Method Writes the name out to Console*/
 		public virtual void Draw(){
 			Console.WriteLine(name);
 		}
 	
-		/* This method calculates the Space Objects  position 
+		/* This method calculates the Space Objects  position */
 		public virtual Point findPosition(int time = 0);{
-			(getOrbitalRadius() * 2 * Math.PI)*getOrbitalPeriod 
-		}*/
+			
+			double rad = ( time % period_orbital ) * (2 * Math.PI);
+			
+			Point pos = new Point();
+			pos.x = Math.Cos(rad);
+			pos.y = Math.Sin(rad);
+			
+			if(orbitElem != null){
+				
+				Point referance = orbitElem.findPosition(time);
+				
+				pos.x += referance.x;
+				
+				pos.y += referance.y;
+				
+			}
+			
+			return pos;
+		}
 		
 	}
 
@@ -124,7 +144,7 @@ namespace SpaceSim{
 		
 	}
 	
-	public class DwarfPlanet : SpaceObject{
+	public class DwarfPlanet : Planet{
 		
 		public DwarfPlanet(String _name):base(_name){}
 		
