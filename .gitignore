@@ -1,9 +1,14 @@
 #Folders
 gen/
 bin/
+obj/
 
 #Library
 *.dll
 
 #Executables
 *.exe
+*.csproj
+*.cache
+*.txt
+*.pdb
