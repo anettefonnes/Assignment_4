@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace SpaceSim{
 	
@@ -7,7 +8,8 @@ namespace SpaceSim{
 	public class SpaceObject{
 		
 		//Protected Variables
-		protected SpaceObject orbitElem;
+		protected SpaceObject pericenter;
+        protected List<SpaceObject> apocenters;
 		protected string name;
 		protected string color;
 		protected double radius_orbital;
@@ -15,7 +17,8 @@ namespace SpaceSim{
 		protected double radius_object;
 		protected double period_rotational;
 
-        protected void setOrbitElement( SpaceObject *_orbitElem){ orbitElem = _orbitElem; }
+        protected void setPericenter(SpaceObject _pericenter) { pericenter = _pericenter; }
+        protected void setApocenter(List<SpaceObject> _apocenter) { apocenters = _apocenter; }
 		protected void setOrbitalRadius(double _orbRad = 10) { radius_orbital = _orbRad;}
 		protected void setOrbitalPeriod(double _orbPer = 10) { period_orbital = _orbPer; }
 		protected void setRotationalPeriod(double _rotPer = 10){ period_rotational = _rotPer; }
@@ -31,17 +34,18 @@ namespace SpaceSim{
 		public double getObjectRadius(){ return radius_object; }
 		public string getName(){ return name;}
 		public string getColor(){ return color;}
+
 	
 
 		//Constructors
 		public SpaceObject(String _name = "Unknown Object", string _color = "Blue" , double _rotPer = 10 , double _objRad = 10 , SpaceObject _Obj = null, double _orbRad = 0 , double _orbPer = 0){
 			setName(_name); 
-            setOrbitElement(_Obj);
+            setPericenter(_Obj);
             setColor( _color);
         	setRotationalPeriod( _rotPer );
 	        setObjectRadius(_objRad);
 
-            if(orbitElem == null){
+            if(pericenter == null){
                 _orbPer = 0;
                 _orbRad = 0;
             }
@@ -52,8 +56,7 @@ namespace SpaceSim{
 		//Public Methods
 		/*This Method Writes the name out to Console*/
 		public virtual void Draw(){
-            Point pos = findPosition();
-            Console.WriteLine(name + " ; pos.x = " + pos.X + " , pos.y = " + pos.Y);
+            Console.WriteLine(name /* + " ; pos.x = " + pos.X + " , pos.y = " + pos.Y*/);
 
 		}
 	
@@ -62,7 +65,7 @@ namespace SpaceSim{
             
             Point pos = new Point(0,0);
             
-			if(orbitElem != null){
+			if(pericenter != null){
             
                 double rad = time % period_orbital * (2 * Math.PI);
 
@@ -76,7 +79,11 @@ namespace SpaceSim{
 			
 			return pos;
 		}
-		
+
+        public void addApocenter(SpaceObject _apo){
+            // add orbital radius VS this.object.radius check -> Throw?Bool?
+            apocenters.Add(_apo);
+        }
 	}
 
 
