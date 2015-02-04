@@ -54,13 +54,13 @@ namespace SpaceSim{
 		}
 
 		//Public Methods
-		/*This Method Writes the name out to Console*/
+		/** This Method Writes the name out to Console*/
 		public virtual void Draw(){
             Console.WriteLine(name /* + " ; pos.x = " + pos.X + " , pos.y = " + pos.Y*/);
 
 		}
 	
-		/* This method calculates the Space Objects  position */
+		/** This method calculates the Space Objects  position */
 		public virtual Point findPosition(double time = 0){
             
             Point pos = new Point(0,0);
@@ -80,6 +80,7 @@ namespace SpaceSim{
 			return pos;
 		}
 
+        /** [TODO] Adding SpaceObject orbiting this object  */ 
         public void addApocenter(SpaceObject _apo){
             // add orbital radius VS this.object.radius check -> Throw?Bool?
             apocenters.Add(_apo);
